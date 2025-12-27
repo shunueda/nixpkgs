@@ -15,6 +15,7 @@ let
       luftmensch-luftmensch
       massimogengarelli
       sebtm
+      shunueda
     ];
     platforms = [ "x86_64-linux" ] ++ lib.platforms.darwin;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
