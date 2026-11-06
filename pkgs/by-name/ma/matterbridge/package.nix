@@ -34,7 +34,7 @@ buildGoModule {
     description = "Multi-protocol chat bridge (IRC, Matrix, XMPP, Discord, Telegram, etc…)";
     homepage = "https://github.com/matterbridge-org/matterbridge";
     license = lib.licenses.agpl3Only;
-    maintainers = with lib.maintainers; [ ryantm ];
+    maintainers = with lib.maintainers; [ ryantm shunueda ];
     mainProgram = "matterbridge";
   };
 }
