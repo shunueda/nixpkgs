@@ -2,27 +2,38 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
+
+  # msteams uses a lot of RAM while building
+  nomsteams ? true,
+  # excludes the zulip bridge from the build. Off by default to match upstream's default feature set
+  nozulip ? false,
 }:
 
 buildGoModule {
   pname = "matterbridge";
-  version = "1.26.0-unstable-2024-08-27";
+  version = "1.26.0-unstable-2026-10-24";
 
   src = fetchFromGitHub {
-    owner = "42wim";
+    owner = "matterbridge-org";
     repo = "matterbridge";
-    rev = "c4157a4d5b49fce79c80a30730dc7c404bacd663";
-    hash = "sha256-ZnNVDlrkZd/I0NWmQMZzJ3RIruH0ARoVKJ4EyYVdMiw=";
+    rev = "ef72d19f9d88e00032dfa8062d7920a67466491f";
+    hash = "sha256-GjXoRgQt0AOeVVazAPT4APqfLmgr6vtmdWEJ+OUL5Ls=";
   };
 
   subPackages = [ "." ];
 
-  vendorHash = null;
+  tags = [
+    "goolm"
+  ]
+  ++ lib.optionals nomsteams [ "nomsteams" ]
+  ++ lib.optionals nozulip [ "nozulip" ];
+
+  vendorHash = "sha256-8p3r3PfqdY2y/FPgmq6SCG1wZhgZ3soCfjKRyvXdGq0=";
 
   meta = {
-    description = "Simple bridge between Mattermost, IRC, XMPP, Gitter, Slack, Discord, Telegram, Rocket.Chat, Hipchat(via xmpp), Matrix and Steam";
-    homepage = "https://github.com/42wim/matterbridge";
-    license = lib.licenses.asl20;
+    description = "Multi-protocol chat bridge (IRC, Matrix, XMPP, Discord, Telegram, etc…)";
+    homepage = "https://github.com/matterbridge-org/matterbridge";
+    license = lib.licenses.agpl3Only;
     maintainers = with lib.maintainers; [ ryantm ];
     mainProgram = "matterbridge";
   };
