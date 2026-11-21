@@ -61,22 +61,6 @@ in
     };
   };
 
-  imports = [
-    (lib.mkRenamedOptionModule [ "programs" "river" "enable" ] [ "programs" "river-classic" "enable" ])
-    (lib.mkRenamedOptionModule
-      [ "programs" "river" "package" ]
-      [ "programs" "river-classic" "package" ]
-    )
-    (lib.mkRenamedOptionModule
-      [ "programs" "river" "xwayland" "enable" ]
-      [ "programs" "river-classic" "xwayland" "enable" ]
-    )
-    (lib.mkRenamedOptionModule
-      [ "programs" "river" "extraPackages" ]
-      [ "programs" "river-classic" "extraPackages" ]
-    )
-  ];
-
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
       {
